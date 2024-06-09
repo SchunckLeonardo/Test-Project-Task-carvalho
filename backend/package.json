@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Project to test task",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "node index.js --watch"
+    "dev": "node --watch index.js"
   },
   "keywords": [],
   "author": "",
