@@ -1,6 +1,7 @@
 import axios from "axios";
 import { JSDOM } from "jsdom";
 
+// Fetches the Amazon search page and returns the products
 export async function fetchContentAmazonSearch(search) {
   const url = `https://www.amazon.com/s?k=${encodeURIComponent(search)}`;
 
