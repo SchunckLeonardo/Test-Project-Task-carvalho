@@ -7,9 +7,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/", router);
-
-fetchContentAmazonSearch('iphone')
+app.use("/api", router);
 
 app.listen(5500, () => {
   console.log('Server is running on port 5500')

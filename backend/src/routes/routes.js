@@ -1,7 +1,10 @@
-import express from 'express'
+import express from "express";
+import { fetchContentAmazonSearch } from "../utils/fetchContentAmazonSearch.js";
 
-export const router = express.Router()
+export const router = express.Router();
 
-router.get('/users', (req, res) => {
-  res.send('Hello from users')
-})
+router.get("/scrape", async (req, res) => {
+  const { keyword } = req.query;
+  const products = await fetchContentAmazonSearch(keyword);
+  res.json({ products });
+});
