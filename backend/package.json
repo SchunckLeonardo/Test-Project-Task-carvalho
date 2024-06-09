@@ -1,0 +1,17 @@
+{
+  "name": "test-project-task",
+  "version": "1.0.0",
+  "description": "Project to test task",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "express": "^4.19.2",
+    "jsdom": "^24.1.0"
+  }
+}
