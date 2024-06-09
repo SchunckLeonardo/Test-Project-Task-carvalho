@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Project Task</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      form {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      input {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #content {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #results {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #results li {
+        display: flex;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        text-overflow: ellipsis;
+      }
+
+      #results li img {
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        object-fit: cover;
+      }
+
+      #results li div {
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      #results li h3 {
+        margin: 0;
+        width: 300px;
+      }
+
+      #results li p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Search content in Amazon store</h1>
+    <form onsubmit="searchContent(event)">
+      <input
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Search content"
+      />
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="content">
+      <h2>Results</h2>
+      <ul id="results"></ul>
+    </div>
+
+    <script>
+      function searchContent(event) {
+        event.preventDefault();
+        const search = document.getElementById("search").value;
+
+        fetch(`http://localhost:5500/api/scrape?keyword=${search}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const results = document.getElementById("results");
+            results.innerHTML = "";
+
+            data.products.forEach((item) => {
+              const li = document.createElement("li");
+              li.innerHTML = `
+                <img src="${item.imageUrl}" />
+                <div>
+                  <h3>${item.title}</h3>
+                  <p>Rating: ${item.rating}</p>
+                  <p>Number of Reviews: ${item.reviews}</p>
+                </div>
+              `;
+
+              results.appendChild(li);
+            });
+          });
+      }
+    </script>
+  </body>
+</html>
